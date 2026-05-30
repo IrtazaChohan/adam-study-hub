@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adam All-Subject Study Hub</title>
+  <style>
+    :root {
+      --bg-a: #f4fbf7;
+      --bg-b: #eef4ff;
+      --panel: #ffffff;
+      --line: #d8e3f1;
+      --text: #1a2332;
+      --muted: #5b6e87;
+      --brand: #0b6a57;
+      --brand2: #1a4f9a;
+      --chip: #edf4ff;
+      --chip-text: #1f456f;
+      --chip-line: #c9d9ef;
+      --ok-bg: #e8f8f2;
+      --ok-text: #175a49;
+      --ok-line: #bde8d8;
+      --radius: 16px;
+      --shadow: 0 14px 30px rgba(19, 34, 56, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      font-family: "Avenir Next", "Trebuchet MS", "Gill Sans", sans-serif;
+      background:
+        radial-gradient(circle at 8% 0%, rgba(36, 155, 121, 0.2) 0, transparent 32%),
+        radial-gradient(circle at 100% 100%, rgba(26, 79, 154, 0.2) 0, transparent 35%),
+        linear-gradient(155deg, var(--bg-a), var(--bg-b));
+    }
+
+    .wrap {
+      max-width: 1220px;
+      margin: 0 auto;
+      padding: 18px 12px 30px;
+    }
+
+    .hero {
+      background: linear-gradient(130deg, var(--brand), var(--brand2));
+      color: #ffffff;
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      padding: 22px 18px;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(1.4rem, 0.9rem + 2vw, 2.3rem);
+      font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+      letter-spacing: 0.2px;
+    }
+
+    .hero p {
+      margin: 10px 0 0;
+      color: #e8f8ff;
+      line-height: 1.5;
+      max-width: 900px;
+    }
+
+    .hero-tools {
+      margin-top: 12px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .panel {
+      margin-top: 14px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 12px;
+    }
+
+    .panel h2 {
+      margin: 0;
+      font-size: 1.15rem;
+      font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    }
+
+    .meta {
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.45;
+    }
+
+    .row {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .grid {
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 10px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #ffffff;
+      padding: 10px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .card-title {
+      font-size: 1rem;
+      font-weight: 800;
+    }
+
+    .btn {
+      appearance: none;
+      text-decoration: none;
+      border: 1px solid var(--chip-line);
+      border-radius: 999px;
+      background: var(--chip);
+      color: var(--chip-text);
+      font: inherit;
+      font-size: 0.88rem;
+      font-weight: 700;
+      padding: 8px 11px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 36px;
+      transition: transform 0.14s ease, filter 0.14s ease;
+    }
+
+    .btn:hover,
+    .btn:focus {
+      transform: translateY(-1px);
+      filter: brightness(0.97);
+    }
+
+    .btn.active {
+      background: linear-gradient(120deg, var(--brand), var(--brand2));
+      color: #fff;
+      border-color: transparent;
+    }
+
+    .btn.file {
+      background: var(--ok-bg);
+      color: var(--ok-text);
+      border-color: var(--ok-line);
+      justify-content: flex-start;
+      text-align: left;
+      width: 100%;
+      border-radius: 10px;
+      font-weight: 700;
+    }
+
+    .empty {
+      margin-top: 10px;
+      border: 1px dashed var(--line);
+      border-radius: 12px;
+      padding: 10px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .file-list {
+      margin-top: 10px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .file-count {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .foot {
+      margin-top: 16px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 700px) {
+      .wrap { padding: 12px 10px 24px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <h1>Adam All-Subject Study Hub</h1>
+      <p>Choose level, subject, board, and section. Then open any file directly. PDF links open normally so iPad Share to OneNote still works.</p>
+      <div class="hero-tools">
+        <a class="btn" href="AS-Level/AS-Physics/OCR/Topic%20Questions/index.html" target="_blank" rel="noopener">OCR Physics Tracker Dashboard</a>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>1) Choose Level</h2>
+      <div class="row" id="levelRow"></div>
+    </section>
+
+    <section class="panel">
+      <h2>2) Choose Subject</h2>
+      <div class="meta" id="subjectMeta">Pick a level first.</div>
+      <div class="grid" id="subjectGrid"></div>
+      <div class="empty" id="subjectEmpty" hidden>No subjects found.</div>
+    </section>
+
+    <section class="panel">
+      <h2>3) Choose Board and Section</h2>
+      <div class="meta" id="boardMeta">Pick a subject.</div>
+      <div class="grid" id="boardGrid"></div>
+      <div class="empty" id="boardEmpty" hidden>No boards found.</div>
+    </section>
+
+    <section class="panel">
+      <h2>4) Open Files</h2>
+      <div class="meta" id="filesMeta">Pick a section to view files.</div>
+      <div class="file-count" id="fileCount"></div>
+      <div class="file-list" id="fileList"></div>
+      <div class="empty" id="fileEmpty">No section selected yet.</div>
+    </section>
+
+    <p class="foot">AQA AS-Maths and A-Level Maths Topic Questions are shown as separate section buttons but can share the same resources where available.</p>
+  </main>
+
+  <script>
+    let catalog = null;
+    let selectedLevel = null;
+    let selectedSubject = null;
+    let selectedSection = null;
+
+    const levelRow = document.getElementById("levelRow");
+    const subjectGrid = document.getElementById("subjectGrid");
+    const boardGrid = document.getElementById("boardGrid");
+    const subjectMeta = document.getElementById("subjectMeta");
+    const boardMeta = document.getElementById("boardMeta");
+    const filesMeta = document.getElementById("filesMeta");
+    const fileCount = document.getElementById("fileCount");
+    const fileList = document.getElementById("fileList");
+
+    const subjectEmpty = document.getElementById("subjectEmpty");
+    const boardEmpty = document.getElementById("boardEmpty");
+    const fileEmpty = document.getElementById("fileEmpty");
+
+    function normPath(path) {
+      return String(path || "").replace(/\\/g, "/");
+    }
+
+    function createButton(text, isActive, onClick) {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "btn" + (isActive ? " active" : "");
+      btn.textContent = text;
+      btn.addEventListener("click", onClick);
+      return btn;
+    }
+
+    function getLevel(levelName) {
+      return (catalog.levels || []).find((l) => l.name === levelName) || null;
+    }
+
+    function getSubject() {
+      const level = getLevel(selectedLevel);
+      if (!level) return null;
+      return (level.subjects || []).find((s) => s.name === selectedSubject) || null;
+    }
+
+    function renderLevels() {
+      levelRow.innerHTML = "";
+      (catalog.levels || []).forEach((level) => {
+        levelRow.appendChild(createButton(level.name, selectedLevel === level.name, () => {
+          selectedLevel = level.name;
+          const firstSubject = (level.subjects || [])[0];
+          selectedSubject = firstSubject ? firstSubject.name : null;
+          selectedSection = null;
+          renderAll();
+        }));
+      });
+    }
+
+    function renderSubjects() {
+      subjectGrid.innerHTML = "";
+      const level = getLevel(selectedLevel);
+      const subjects = level ? level.subjects || [] : [];
+
+      subjectMeta.textContent = level ? ("Subjects in " + level.name + ".") : "Pick a level first.";
+      subjectEmpty.hidden = subjects.length !== 0;
+
+      subjects.forEach((subject) => {
+        const card = document.createElement("article");
+        card.className = "card";
+
+        const title = document.createElement("div");
+        title.className = "card-title";
+        title.textContent = subject.name;
+
+        const open = createButton(selectedSubject === subject.name ? "Selected" : "Open Subject", selectedSubject === subject.name, () => {
+          selectedSubject = subject.name;
+          selectedSection = null;
+          renderAll();
+        });
+
+        card.appendChild(title);
+        card.appendChild(open);
+        subjectGrid.appendChild(card);
+      });
+    }
+
+    function renderBoards() {
+      boardGrid.innerHTML = "";
+      const subject = getSubject();
+      const boards = subject ? subject.boards || [] : [];
+
+      boardMeta.textContent = subject ? (subject.name + " - choose a section") : "Pick a subject.";
+      boardEmpty.hidden = boards.length !== 0;
+
+      boards.forEach((board) => {
+        const card = document.createElement("article");
+        card.className = "card";
+
+        const title = document.createElement("div");
+        title.className = "card-title";
+        title.textContent = board.name;
+        card.appendChild(title);
+
+        const row = document.createElement("div");
+        row.className = "row";
+
+        (board.sections || []).forEach((section) => {
+          const sectionKey = board.name + "|" + section.name + "|" + section.path;
+          row.appendChild(createButton(section.name, selectedSection && selectedSection.key === sectionKey, () => {
+            selectedSection = { key: sectionKey, board: board.name, section: section };
+            renderFiles();
+            renderBoards();
+          }));
+        });
+
+        card.appendChild(row);
+        boardGrid.appendChild(card);
+      });
+    }
+
+    function renderFiles() {
+      fileList.innerHTML = "";
+
+      if (!selectedSection) {
+        filesMeta.textContent = "Pick a section to view files.";
+        fileCount.textContent = "";
+        fileEmpty.hidden = false;
+        fileEmpty.textContent = "No section selected yet.";
+        return;
+      }
+
+      const section = selectedSection.section;
+      const files = (section.files || []).slice().sort((a, b) => a.name.localeCompare(b.name));
+
+      filesMeta.textContent = selectedSubject + " / " + selectedSection.board + " / " + section.name;
+      fileCount.textContent = files.length + " file(s) found.";
+
+      if (!files.length) {
+        fileEmpty.hidden = false;
+        fileEmpty.textContent = "This section currently has no files copied yet.";
+        return;
+      }
+
+      fileEmpty.hidden = true;
+      files.forEach((file) => {
+        const a = document.createElement("a");
+        a.className = "btn file";
+        a.href = encodeURI(normPath(file.path));
+        a.target = "_blank";
+        a.rel = "noopener";
+        a.textContent = file.name;
+        fileList.appendChild(a);
+      });
+    }
+
+    function renderAll() {
+      renderLevels();
+      renderSubjects();
+      renderBoards();
+      renderFiles();
+    }
+
+    async function start() {
+      const response = await fetch("study-catalog.json", { cache: "no-store" });
+      catalog = await response.json();
+
+      const firstLevel = (catalog.levels || [])[0];
+      selectedLevel = firstLevel ? firstLevel.name : null;
+      selectedSubject = firstLevel && firstLevel.subjects && firstLevel.subjects[0] ? firstLevel.subjects[0].name : null;
+
+      renderAll();
+    }
+
+    start().catch(() => {
+      fileEmpty.hidden = false;
+      fileEmpty.textContent = "Could not load study-catalog.json. Refresh the page or check deployment.";
+    });
+  </script>
+</body>
+</html>
